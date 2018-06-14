@@ -16,7 +16,19 @@
 <div id="playlistList">
    <table id="playlistGrid" class="display" cellspacing="0" width="100%">
       <thead><tr><th>Playlist Name</th><th>Number of Tracks</th></tr></thead>
-   </table>
+	</table>
+</div>
+<div id="newPlaylist">
+<label>
+	Playlist Name:
+</label>
+<textbox id="playlistNameTB"></textbox>&nbsp;&nbsp;
+<label>
+Description:
+</label>
+<textbox id="descriptionTB">
+</textbox>
+	
 </div>
 </div></p>
 
@@ -64,9 +76,6 @@ function requestDashboard() {
 	    ]
       } );
    }
-      $( "body" )
-          .append( "Playlist raw: " + JSON.stringify(data));
-    }, "json" );
 }
 
 function startIt() {
