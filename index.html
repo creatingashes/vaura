@@ -19,15 +19,12 @@
 	</table>
 </div>
 <div id="newPlaylist">
-<label>
-	Playlist Name:
-</label>
-<textbox id="playlistNameTB"></textbox>&nbsp;&nbsp;
-<label>
-Description:
-</label>
-<textbox id="descriptionTB">
-</textbox>
+
+<FORM NAME="newPlaylist" ACTION="" METHOD="GET">Create New Playlist <BR>
+Playlist Name: <INPUT TYPE="text" NAME="playlistNameIB" VALUE="">
+Description: <INPUT TYPE="text" NAME="descriptionIB" VALUE="">
+<INPUT TYPE="button" NAME="newPlaylistBT" Value="Click" onClick="createAlbum(this.form)">
+</FORM>
 	
 </div>
 </div></p>
@@ -86,6 +83,12 @@ function startIt() {
    } else {
       requestDashboard();
    }
+}
+	
+function createAlbum(event) {
+	var playlistName = event.playlistNameIB.value;
+	var description = event.descriptionIB.value;
+   alert ("You typed: " + playlistName + ":" + description);
 }
 </script>
 </body>
