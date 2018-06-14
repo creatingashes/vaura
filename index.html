@@ -34,7 +34,7 @@ function dashboardCallback(response){
    
 function requestDashboard() {
     var URL = "https://api.spotify.com/v1/me?access_token=" + getUrlParm('access_token');
-    $.ajax({ url: URL, dataType: "json", jsonpCallback: "dashboardCallback" });
+    $.ajax({ url: URL, json: true, jsonpCallback: "dashboardCallback" });
 }
 
 function startIt() {
