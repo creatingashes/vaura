@@ -18,7 +18,7 @@ function dashboardCallback(response){
       window.location.href = authUrl;
    } else if (getUrlParm('access_token') != null) {
       var para = document.createElement("p");
-      var para.innerHTML = "Name:&nbsp;" + response.display_name + "<br/>Email:&nbsp;" + response.email;
+      para.innerHTML = "Name:&nbsp;" + response.display_name + "<br/>Email:&nbsp;" + response.email;
       document.getElementById("summary").appendChild(para);
    }
 }   
