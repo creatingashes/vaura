@@ -13,14 +13,17 @@
 <body onload="startIt()">
  <p><div id="content">
 <div id="summary"></div><br/>
-<div id="notificationsList">
-   <table id="notificationsGrid" class="display" cellspacing="0" width="100%">
-      <thead><tr><th>Updated</th><th>Notification</th></tr></thead>
+<div id="playlistList">
+   <table id="playlistGrid" class="display" cellspacing="0" width="100%">
+      <thead><tr><th>Playlist Name</th><th>Number of Tracks</th></tr></thead>
    </table>
 </div>
 </div></p>
 
 <script>
+
+var playlistList;
+
 function getUrlParm(parm) {
    var res1 = new URL(window.location.href.replace("#","?"));
    if (res1.searchParams == null) {
@@ -40,6 +43,32 @@ function requestDashboard() {
   
     URL = "https://api.spotify.com/v1/me/playlists?access_token=" + getUrlParm('access_token');
       $.get(URL, function( data ) {
+           var playlistData = [];
+   for (var key in data.items) {
+      playlistData.push(data.items[key]);
+   }
+
+   if (playlistData.length > 0 && typeof playlistData[0].updated != "undefined") {
+      $(playlistGrid).DataTable( {
+	 "paging":   false,
+	 "ordering": false,
+	 "info":     false,
+	 data: playlistData,
+	    "columns": [
+	    { "data" : "playlistName",
+		 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+		    var pn = oData.name;
+		    $(nTd).html(pn);
+		 },
+	    },
+	    { "data": "tracks",
+		 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+		    $(nTd).html(oData.tracks.total);
+		 }
+	    }
+	    ]
+      } );
+   }
       $( "body" )
           .append( "Playlist raw: " + JSON.stringify(data));
     }, "json" );
