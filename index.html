@@ -10,6 +10,15 @@
  </div>
 
 <script>
+function getUrlParm(parm) {
+   var res1 = new URL(window.location.href.replace("#","?"));
+   if (res1.searchParams == null) {
+      return null;
+   } else {
+      return res1.searchParams.get(parm);
+   }
+} 
+ 
 function startIt() {
    if (getUrlParm('access_token') == null) {
       var authUrl = "https://accounts.spotify.com/authorize?client_id=971e22b392a7466b8e359b9622bd850b&response_type=code&scope=user-read-private user-read-email&state=ponmlkjihgfedcba&redirect_uri=https://rawgit.com/creatingashes/vaura/master/index.html";
