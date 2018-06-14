@@ -1,5 +1,6 @@
 <html>
 <body onload="startIt()">
+<div id="summary"></div><br/>
 
 <script>
 function getUrlParm(parm) {
@@ -10,7 +11,23 @@ function getUrlParm(parm) {
       return res1.searchParams.get(parm);
    }
 } 
- 
+
+function dashboardCallback(response){
+   if (response.code === "not_authorized") {
+      var authUrl = "https://accounts.spotify.com/authorize?client_id=971e22b392a7466b8e359b9622bd850b&response_type=token&redirect_uri=https://rawgit.com/creatingashes/vaura/master/index.html";
+      window.location.href = authUrl;
+   } else if (getUrlParm('access_token') != null) {
+      var para = document.createElement("p");
+      var para.innerHTML = "Name:&nbsp;" + response.display_name + "<br/>Email:&nbsp;" + response.email;
+      document.getElementById("summary").appendChild(para);
+   }
+}   
+   
+function requestDashboard() {
+    var URL = "https://api.spotify.com/v1/me?access_token=" + getUrlParm('access_token');
+    $.ajax({ url: URL, dataType: "jsonp", jsonpCallback: "dashboardCallback" });
+}
+
 function startIt() {
    if (getUrlParm('access_token') == null) {
       var authUrl = "https://accounts.spotify.com/authorize?client_id=971e22b392a7466b8e359b9622bd850b&response_type=token&redirect_uri=https://rawgit.com/creatingashes/vaura/master/index.html";
