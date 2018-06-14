@@ -48,7 +48,7 @@ function requestDashboard() {
       playlistData.push(data.items[key]);
    }
 
-   if (playlistData.length > 0 && typeof playlistData[0].updated != "undefined") {
+   if (playlistData.length > 0) {
       $(playlistGrid).DataTable( {
 	 "paging":   false,
 	 "ordering": false,
