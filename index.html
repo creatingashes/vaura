@@ -26,7 +26,8 @@ function dashboardCallback(response){
       window.location.href = authUrl;
    } else if (getUrlParm('access_token') != null) {
       var para = document.createElement("p");
-      para.innerHTML = "Name:&nbsp;" + response.display_name + "<br/>Email:&nbsp;" + response.email;
+      var userObj = JSON.parse(response); 
+     para.innerHTML = "Name:&nbsp;" + userObj.display_name + "<br/>Email:&nbsp;" + userObj.email;
       document.getElementById("summary").appendChild(para);
    }
 }   
