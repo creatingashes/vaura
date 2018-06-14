@@ -19,26 +19,16 @@ function getUrlParm(parm) {
       return res1.searchParams.get(parm);
    }
 } 
-
-function dashboardCallback(response){
-   if (response.code === "not_authorized") {
-      var authUrl = "https://accounts.spotify.com/authorize?client_id=971e22b392a7466b8e359b9622bd850b&response_type=token&redirect_uri=https://rawgit.com/creatingashes/vaura/master/index.html";
-      window.location.href = authUrl;
-   } else if (getUrlParm('access_token') != null) {
-      var para = document.createElement("p");
-      var userObj = JSON.parse(response); 
-     para.innerHTML = "Name:&nbsp;" + userObj.display_name + "<br/>Email:&nbsp;" + userObj.email;
-      document.getElementById("summary").appendChild(para);
-   }
-}   
    
 function requestDashboard() {
     var URL = "https://api.spotify.com/v1/me?access_token=" + getUrlParm('access_token');
     $.get(URL, function( data ) {
       $( "body" )
-          .append( "Name: " + data.display_name)
+          .append( "ID: " + data.id)
           .append( " Email: " + data.email);
     }, "json" );
+  
+    URL = "https://api.spotify.com/v1/me/playlists?access_token=" + getUrlParm('access_token');
 }
 
 function startIt() {
