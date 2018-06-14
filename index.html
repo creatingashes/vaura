@@ -55,12 +55,7 @@ function requestDashboard() {
 	 "info":     false,
 	 data: playlistData,
 	    "columns": [
-	    { "data" : "playlistName",
-		 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-		    var pn = oData.name;
-		    $(nTd).html(pn);
-		 },
-	    },
+	    { "data" : "name"},
 	    { "data": "tracks",
 		 "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
 		    $(nTd).html(oData.tracks.total);
