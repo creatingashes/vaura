@@ -29,6 +29,10 @@ function requestDashboard() {
     }, "json" );
   
     URL = "https://api.spotify.com/v1/me/playlists?access_token=" + getUrlParm('access_token');
+      $.get(URL, function( data ) {
+      $( "body" )
+          .append( "Playlist raw: " + JSON.stringify(data));
+    }, "json" );
 }
 
 function startIt() {
