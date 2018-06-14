@@ -33,14 +33,14 @@ function getUrlParm(parm) {
 function requestDashboard() {
     var URL = "https://api.spotify.com/v1/me?access_token=" + getUrlParm('access_token');
     $.get(URL, function( data ) {
-      $( "summary" )
+      $( "body" )
           .append( "ID: " + data.id)
           .append( " Email: " + data.email);
     }, "json" );
   
     URL = "https://api.spotify.com/v1/me/playlists?access_token=" + getUrlParm('access_token');
       $.get(URL, function( data ) {
-      $( "summary" )
+      $( "body" )
           .append( "Playlist raw: " + JSON.stringify(data));
     }, "json" );
 }
