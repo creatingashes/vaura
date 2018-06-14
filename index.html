@@ -12,7 +12,7 @@
 <script>
 function startIt() {
    if (getUrlParm('access_token') == null) {
-      var authUrl = "https://accounts.spotify.com/authorize?client_id=971e22b392a7466b8e359b9622bd850b&response_type='code'&redirect_uri=https://rawgit.com/creatingashes/vaura/master/index.html";
+      var authUrl = "https://accounts.spotify.com/authorize?client_id=971e22b392a7466b8e359b9622bd850b&response_type=code&scope=user-read-private user-read-email&state=ponmlkjihgfedcba&redirect_uri=https://rawgit.com/creatingashes/vaura/master/index.html";
       window.location.href = authUrl;
    } else {
       requestDashboard();
