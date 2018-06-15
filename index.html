@@ -102,7 +102,7 @@ function createAlbum(event) {
 	};
 
 	var uri = "https://api.spotify.com/v1/users/" + userId + "/playlists";
-	var authString = 'Bearer ' + access_token;
+	var authString = 'Bearer ' + getUrlParm('access_token');
 	var parameters = JSON.stringify({ name:playlistName, description:description });
 
 	xmlhttp.open('POST',uri,true);
