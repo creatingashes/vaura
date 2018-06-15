@@ -30,7 +30,7 @@ Description: <INPUT TYPE="text" NAME="descriptionIB" VALUE="">
 </div></p>
 
 <script>
-
+var userId;
 var playlistList;
 
 function getUrlParm(parm) {
@@ -45,6 +45,7 @@ function getUrlParm(parm) {
 function requestDashboard() {
     var URL = "https://api.spotify.com/v1/me?access_token=" + getUrlParm('access_token');
     $.get(URL, function( data ) {
+	userId = data.id;
       $( "body" )
           .append( "ID: " + data.id)
           .append( " Email: " + data.email);
@@ -88,6 +89,24 @@ function startIt() {
 function createAlbum(event) {
 	var playlistName = event.playlistNameIB.value;
 	var description = event.descriptionIB.value;
+	if(window.XMLHttpRequest){
+		 xmlhttp = new XMLHttpRequest();
+	}else{
+		 xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+	};
+
+	xmlhttp.onreadystatechange = function(){
+		 if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+			  document.getElementById('message').innerHTML = xmlhttp.responseText;
+		 };  
+	};
+
+	parameters = { name:playlistName, description:description };
+
+	xmlhttp.open('POST',"https://api.spotify.com/v1/users/" + userId + "/playlists",true);
+	xmlhttp.setRequestHeader('Content-Type', 'application/json');
+	xmlhttp.setRequestHeader('Authorization', 'Bearer ' + access_token);
+	xmlhttp.send(JSON.stringify(parameters));
    alert ("You typed: " + playlistName + ":" + description);
 }
 </script>
