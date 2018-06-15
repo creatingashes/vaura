@@ -105,7 +105,7 @@ function createAlbum(event) {
 
 	xmlhttp.open('POST',"https://api.spotify.com/v1/users/" + userId + "/playlists",true);
 	xmlhttp.setRequestHeader('Content-Type', 'application/json');
-	xmlhttp.setRequestHeader('Authorization', 'Bearer ' + access_token);
+	xmlhttp.setRequestHeader('Authorization', 'Bearer ' + getUrlParm('access_token'));
 	xmlhttp.send(JSON.stringify(parameters));
    alert ("You typed: " + playlistName + ":" + description);
 }
